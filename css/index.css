@@ -1,0 +1,36 @@
+*{
+    margin: 9;
+    padding: 0;
+}
+.box{
+    margin: 100px auto;
+    width: 400px;
+    height: 400px;
+    background-color: #ff9301;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.6s;
+}
+
+.box p{
+    text-align: center;
+    line-height: 400px;
+    color: #6dd0fa;
+    font-size: 70px;
+    font-weight: 500;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    user-select: none;
+}
+
+/* 设置文字旋转效果 */
+@keyframes move {
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes move {
+    100%{
+        transform: rotate(360deg);
+    }
+}
