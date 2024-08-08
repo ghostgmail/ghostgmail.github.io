@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ghostgmail的网站</title>
+
+    <style>
+        #music_list {
+
+            & li {
+                display: flex;
+
+                & p {
+                    width: 150px;
+                }
+            }
+        }
+
+        #control_audio {
+            background-size: 100px;
+            width: 100px;
+            height: 100px;
+            border: 0px;
+        }
+
+        .play {
+            background: url(./static/icon/play.png) no-repeat;
+        }
+
+        .suspend {
+            background: url(./static/icon/suspend.png) no-repeat;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <ul id="music_list"></ul>
+        <button class="play" id="control_audio" />
+    </div>
+
+    <audio id="audio" />
+
+    <script>
+        const data = [
+            "鸟之诗（八音盒）",
+            "夜、萤火虫和你"
+        ]
+
+        // 播放器初始化
+        const initMusic = v => {
+            document.querySelector("#audio").src = `./music/${data[v]}.mp3`
+        }
+
+        // 音乐列表初始化
+        const initMusicList = () => {
+            let html = ``
+            for (let i = 0; i < data.length; i++) {
+                html += `<li><p>${data[i]}</p><input type="radio" name="music" value="${i}" ${i == 0 ? "checked" : ""} onclick="switchMusic(this)"></li>`
+            }
+
+            document.querySelector("#music_list").innerHTML = html
+        }
+
+        // 播放暂停
+        let playing = false
+        const control = document.querySelector("#control_audio")
+        const audio = document.querySelector("#audio")
+        control.addEventListener("click", function () {
+            if (!playing) {
+                this.classList.remove("play")
+                this.classList.add("suspend")
+                audio.play()
+            } else {
+                this.classList.add("play")
+                this.classList.remove("suspend")
+                audio.pause()
+            }
+            playing = !playing;
+        })
+
+        // 切换音乐
+        const switchMusic = v => {
+            initMusic(v.value)
+            if (playing) audio.play()
+        }
+
+        initMusicList()
+        initMusic(document.querySelector("input[name='music']:checked").value)
+    </script>
+</body>
+
+</html>
